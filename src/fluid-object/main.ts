@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-// Hello
+
 import { v4 as uuidv4 } from 'uuid';
 import {
     DataObject,
@@ -20,12 +20,16 @@ import {
 import { NoteWithVotes } from "./NoteWithVotes";
 import { AutoNote, FakeUser } from "./demo";
 
+/*
+ * #1 Extend DataObject
+ */
 export class Notero extends DataObject implements INoteroDataModel {
 
     // Local references to the SharedMaps used in this component
-    private notesMap: SharedMap;
-    private votesMap: SharedMap;
-    private usersMap: SharedMap;
+    /*
+     * #2 Define Properties
+     */
+
 
     // stores a fake userId as we aren't using true auth for this demo
     private userId: string;
@@ -41,18 +45,22 @@ export class Notero extends DataObject implements INoteroDataModel {
      */
     protected async initializingFirstTime() {
         // Create SharedMaps for the notes, votes, and users
-        this.createSharedMap("notes");
-        this.createSharedMap("votes");
-        this.createSharedMap("users");
+        /*
+        * #4 Create SharedMap Objects
+        */
+
+
     }
 
     /**
      * Creates a shared map with the provided id. The id must be unique.
      */
-    private createSharedMap(id: string): void {
-        const map = SharedMap.create(this.runtime);
-        this.root.set(id, map.handle);
-    }
+
+    /*
+     * #3 Create Helper Function
+     */
+
+
 
     /**
     * hasInitialized is called every
@@ -64,9 +72,12 @@ export class Notero extends DataObject implements INoteroDataModel {
     protected async hasInitialized() {
         // Create local references to the SharedMaps.
         // Otherwise, they need to be called async which is inconvenient.
-        this.notesMap = await this.root.get<IFluidHandle<SharedMap>>("notes").get();
-        this.votesMap = await this.root.get<IFluidHandle<SharedMap>>("votes").get();
-        this.usersMap = await this.root.get<IFluidHandle<SharedMap>>("users").get();
+
+        /*
+        * #5 Assign Local References of SharedMap Objects
+        */
+
+
 
         // Add the current user to set of collaborators.
         this.addUser();
@@ -80,23 +91,12 @@ export class Notero extends DataObject implements INoteroDataModel {
     /**
      * Helper function to set up event listeners for shared objects
      */
+    /*
+     * #6 Create Event Listeners Helper
+     */
     private createEventListeners(sharedMap: SharedMap): void {
         // Set up an event listener for changes to values in the SharedMap
         sharedMap.on("valueChanged", () => {
-            this.emit("change");
-        });
-
-        //Set up an event listener for clearing the data in a SharedMap
-        sharedMap.on("clear", () => {
-            this.emit("change");
-        });
-
-        const quorum = this.context.getQuorum();
-        quorum.on("addMember", () => {
-            this.emit("change");
-        });
-
-        quorum.on("removeMember", () => {
             this.emit("change");
         });
     }
