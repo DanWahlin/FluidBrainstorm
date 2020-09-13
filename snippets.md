@@ -1,4 +1,4 @@
-### 1. Extend DataObject
+### 1. Extend DataObject (src/fluid-object/main.ts)
 
 * Container for distributed data structures (DDSes).
 
@@ -57,7 +57,7 @@ private createEventListeners(sharedMap: SharedMap): void {
 }
 ```
 
-### 7. Pass DataObject (Model) to View Props
+### 7. Pass DataObject (Model) to View Props (src/app.tsx)
 
 Pass the DataObject with the SharedMaps into the NoteroView component.
 
@@ -74,7 +74,7 @@ function start() {
 }
 ```
 
-### 8. Use the Model Object Functionality in the Component
+### 8. Use the Model Object Functionality in the Component (src/NoteroView.tsx)
 
 The view can interact with the different functionality of the 
 DataObject/Model as it would any standard object.
