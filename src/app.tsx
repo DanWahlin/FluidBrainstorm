@@ -34,6 +34,9 @@ async function start() {
     const defaultObject = await getDefaultObjectFromContainer<Notero>(container);
 
     // Render the content using ReactDOM
+    /* 
+    * 7. Pass DataObject (Model) to View Props
+    */
     ReactDOM.render(
         <NoteroView model={defaultObject} />,
         document.getElementById("content"));

@@ -1,11 +1,15 @@
-### #1 Extend DataObject
+### 1. Extend DataObject
 
 * Container for distributed data structures (DDSes).
 
-### #2 Define Properties
+![DataObject](images/dataObject.png)
+
+### 2. Define Properties
 
 * See https://fluidframework.com/docs/concepts/dds/#picking-the-right-data-structure for additional DDSes.
 * DDSes/runtime ensure proper order as users contribute notes, votes, etc. Changes across clients are automatically handled.
+
+![DataObject](images/DDSes.png)
 
 ```typescript
 private notesMap: SharedMap;
@@ -13,9 +17,9 @@ private votesMap: SharedMap;
 private usersMap: SharedMap;
 ```
 
-### #3 Create Helper Function
+### 3. Create Helper Function
 
-* Used to create SharedMap objects
+* Used to create SharedMap objects which hook to the runtime.
 
 ```typescript
 private createSharedMap(id: string): void {
@@ -24,7 +28,7 @@ private createSharedMap(id: string): void {
 }
 ```
 
-### #4 Create SharedMap Objects
+### 4. Create SharedMap Objects
 
 ```typescript
 this.createSharedMap("notes");
@@ -32,7 +36,7 @@ this.createSharedMap("votes");
 this.createSharedMap("users");
 ```
 
-### #5 Assign Local References of SharedMap Objects
+### 5. Assign Local References of SharedMap Objects
 
 * Runs everytime client joins. Attach local props to created SharedMaps
 
@@ -42,7 +46,7 @@ this.votesMap = await this.root.get<IFluidHandle<SharedMap>>("votes").get();
 this.usersMap = await this.root.get<IFluidHandle<SharedMap>>("users").get();
 ```
 
-### #6 Create Event Listeners Helper
+### 6. Create Event Listeners Helper
 
 ```typescript
 private createEventListeners(sharedMap: SharedMap): void {
@@ -51,4 +55,49 @@ private createEventListeners(sharedMap: SharedMap): void {
         this.emit("change");
     });
 }
+```
+
+### 7. Pass DataObject (Model) to View Props
+
+Pass the DataObject with the SharedMaps into the NoteroView component.
+
+![DataObject](images/app.png)
+
+```typescript
+function start() {
+
+    ... 
+
+    ReactDOM.render(
+        <NoteroView model={defaultObject} />,
+        document.getElementById("content"));
+}
+```
+
+### 8. Use the Model Object Functionality in the Component
+
+The view can interact with the different functionality of the 
+DataObject/Model as it would any standard object.
+
+![DataObject](images/noteroView.png)
+
+```typescript
+return (
+  <div>
+    <Pad
+      createNote={props.model.createNote}
+      demo={props.model.createDemoNote}
+      user={state.user}
+      users={state.users}
+      setHighlightMine={setHighlightMine}
+      highlightMine={highlightMine}
+    />
+    <Board
+      notes={state.notes}
+      vote={props.model.vote}
+      user={state.user}
+      highlightMine={highlightMine}
+    />
+  </div>
+);
 ```

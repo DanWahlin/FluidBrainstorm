@@ -21,13 +21,13 @@ import { NoteWithVotes } from "./NoteWithVotes";
 import { AutoNote, FakeUser } from "./demo";
 
 /*
- * #1 Extend DataObject
+ * 1. Extend DataObject
  */
 export class Notero extends DataObject implements INoteroDataModel {
 
     // Local references to the SharedMaps used in this component
     /*
-     * #2 Define Properties
+     * 2. Define Properties
      */
 
 
@@ -46,7 +46,7 @@ export class Notero extends DataObject implements INoteroDataModel {
     protected async initializingFirstTime() {
         // Create SharedMaps for the notes, votes, and users
         /*
-        * #4 Create SharedMap Objects
+        * 4. Create SharedMap Objects
         */
 
 
@@ -57,7 +57,7 @@ export class Notero extends DataObject implements INoteroDataModel {
      */
 
     /*
-     * #3 Create Helper Function
+     * 5. Create Helper Function
      */
 
 
@@ -74,7 +74,7 @@ export class Notero extends DataObject implements INoteroDataModel {
         // Otherwise, they need to be called async which is inconvenient.
 
         /*
-        * #5 Assign Local References of SharedMap Objects
+        * 6. Assign Local References of SharedMap Objects
         */
 
 
@@ -92,7 +92,7 @@ export class Notero extends DataObject implements INoteroDataModel {
      * Helper function to set up event listeners for shared objects
      */
     /*
-     * #6 Create Event Listeners Helper
+     * 7. Create Event Listeners Helper
      */
 
 

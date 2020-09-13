@@ -42,7 +42,7 @@ export const NoteroView: FC<NoteroViewProps> = (props) => {
     const onChange = () => setState(generateState());
     props.model.on("change", onChange);
 
-    // useEffect runs after the first render so we will update the view again incase there
+    // useEffect runs after the first render so we will update the view again in case there
     // were changes that came into the model in between generating initialState and setting
     // the above event handler
     onChange();
@@ -52,6 +52,9 @@ export const NoteroView: FC<NoteroViewProps> = (props) => {
     };
   }, []);
 
+  /* 
+   * 8. Use the Model Object Functionality in the Component
+   */
   return (
     <div>
       <Pad
@@ -59,7 +62,6 @@ export const NoteroView: FC<NoteroViewProps> = (props) => {
         demo={props.model.createDemoNote}
         user={state.user}
         users={state.users}
-        clear={() => alert("clear not implemented")}
         setHighlightMine={setHighlightMine}
         highlightMine={highlightMine}
       />
