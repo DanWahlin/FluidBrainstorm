@@ -30,6 +30,7 @@ export class Notero extends DataObject implements INoteroDataModel {
      * 2. Define Properties
      */
 
+     
 
     // stores a fake userId as we aren't using true auth for this demo
     private userId: string;
@@ -57,7 +58,7 @@ export class Notero extends DataObject implements INoteroDataModel {
      */
 
     /*
-     * 5. Create Helper Function
+     * 3. Create Helper Function
      */
 
 
@@ -74,7 +75,7 @@ export class Notero extends DataObject implements INoteroDataModel {
         // Otherwise, they need to be called async which is inconvenient.
 
         /*
-        * 6. Assign Local References of SharedMap Objects
+        * 5. Assign Local References of SharedMap Objects
         */
 
 
@@ -92,7 +93,7 @@ export class Notero extends DataObject implements INoteroDataModel {
      * Helper function to set up event listeners for shared objects
      */
     /*
-     * 7. Create Event Listeners Helper
+     * 6. Create Event Listeners Helper
      */
 
 
