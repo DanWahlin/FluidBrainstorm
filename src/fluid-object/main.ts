@@ -94,12 +94,9 @@ export class Notero extends DataObject implements INoteroDataModel {
     /*
      * #6 Create Event Listeners Helper
      */
-    private createEventListeners(sharedMap: SharedMap): void {
-        // Set up an event listener for changes to values in the SharedMap
-        sharedMap.on("valueChanged", () => {
-            this.emit("change");
-        });
-    }
+
+
+     
 
     public createDemoNote = (): string => {
         return AutoNote.createDemoNote()
