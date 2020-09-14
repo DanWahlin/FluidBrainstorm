@@ -62,6 +62,7 @@ export const NoteroView: FC<NoteroViewProps> = (props) => {
         demo={props.model.createDemoNote}
         user={state.user}
         users={state.users}
+        clear={() => alert("clear not implemented")}
         setHighlightMine={setHighlightMine}
         highlightMine={highlightMine}
       />
